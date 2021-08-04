@@ -5,6 +5,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
 
+	<bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/properties/api.properties</value>
+            </list>
+        </property>
+    </bean>
+    
 	<!-- Maria-DB -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -15,9 +24,9 @@
 		<property name="username" value="e5e9085da300f48c" />
 		<property name="password" value="91bbfb2b1fc65102" /> -->
 		<property name="url"
-			value="jdbc:mysql://127.0.0.1:3306/msa_board" />
-		<property name="username" value="msa_paasta" />
-		<property name="password" value="msa_paasta" />
+			value="jdbc:mysql://${dbms.url}:${dbms.port}/${dbms.name}" />
+		<property name="username" value="${dbms.username}" />
+		<property name="password" value="${dbms.password}" />
 	</bean>
 	
 	<!-- 테스트 실행용

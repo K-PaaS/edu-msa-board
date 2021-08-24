@@ -126,8 +126,8 @@ public class BoardController {
 	}
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/board/{userId}", method = RequestMethod.POST)
-	public Map<String, Object> postBoard(HttpEntity<String> httpEntity, @PathVariable("userId") String userId) {
+	@RequestMapping(value = "/board", method = RequestMethod.POST)
+	public Map<String, Object> postBoard(HttpEntity<String> httpEntity) {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonString = httpEntity.getBody();
@@ -143,9 +143,10 @@ public class BoardController {
 			}
 			Map<String, String> jsonMap = mapper.readValue(jsonString, Map.class);
 
+			
 			String boardTitle = jsonMap.get("boardTitle");
 			String boardText = jsonMap.get("boardText");
-			String writeUserId = userId;
+			String writeUserId = jsonMap.get("writeUserId");
 			String writeUserName = jsonMap.get("writeUserName");
 			
 			// null String check
@@ -178,9 +179,8 @@ public class BoardController {
 				throw new Exception("게시물 생성에 실패하였습니다.");
 			}
 			
-			resultData.put("boardSeq", paramMap.get("boardSeq"));
-
 			result.put("result", "SUCCESS");
+			result.put("boardSeq", paramMap.get("boardSeq"));
 			result.put("resultData", resultData);
 		} catch (Exception e) {
 			result.put("result", "ERROR");
@@ -249,8 +249,8 @@ public class BoardController {
 		return result;
 	}
 
-	@RequestMapping(value = "/board/{boardSeq}/{userId}", method = RequestMethod.DELETE)
-	public Map<String, Object> deleteBoard(@PathVariable("boardSeq") int boardSeq, @PathVariable("userId") String userId, HttpEntity<String> httpEntity) {
+	@RequestMapping(value = "/board/{boardSeq}/{writeUserId}", method = RequestMethod.DELETE)
+	public Map<String, Object> deleteBoard(@PathVariable("boardSeq") int boardSeq, @PathVariable("writeUserId") String writeUserId, HttpEntity<String> httpEntity) {
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -258,7 +258,7 @@ public class BoardController {
 
 		// parameter Setting
 		paramMap.put("boardSeq", boardSeq);
-		paramMap.put("writeUserId", userId);
+		paramMap.put("writeUserId", writeUserId);
 		
 		try {
 			

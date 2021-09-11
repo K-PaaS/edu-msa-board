@@ -16,6 +16,4 @@ public interface BoardService {
 	public int putBoard(Map<String, Object> paramMap) throws Exception;
 
 	public int deleteBoard(Map<String, Object> paramMap) throws Exception;
-
-	public Map<String, Object> getCommentList(Map<String, Object> paramMap) throws Exception;
 }

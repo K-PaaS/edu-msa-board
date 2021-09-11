@@ -105,11 +105,6 @@ public class BoardController {
 			if(boardList != null && boardList.size() == 1) {
 				resultData = (Map<String, Object>)boardList.get(0);
 
-				// TODO commentList 추가
-				Map<String, Object> commentMap = boardService.getCommentList(paramMap);
-				
-				resultData.putAll(commentMap);
-			
 			} else {
 				throw new Exception("일치하는 게시물이 없습니다.");
 			}

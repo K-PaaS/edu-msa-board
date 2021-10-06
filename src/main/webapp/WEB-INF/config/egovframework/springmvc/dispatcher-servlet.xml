@@ -33,7 +33,6 @@
     </bean>
     
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
-    <!-- 쿠키를 이용한 Locale 이용시 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"/> -->
     <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
         <property name="paramName" value="language" />
     </bean>

@@ -9,16 +9,16 @@
                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-    <context:component-scan base-package="paasta.msa">
+    <context:component-scan base-package="kpaas.msa">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
 	<mvc:annotation-driven /> 
 
-	<bean id="AuthAspect" class="paasta.msa.common.AuthAspect" />
+	<bean id="AuthAspect" class="kpaas.msa.common.AuthAspect" />
 	<aop:config>
-		<aop:pointcut id="controllerMethod" expression="execution(* paasta.msa..controller.*Controller.*(..))" />
+		<aop:pointcut id="controllerMethod" expression="execution(* kpaas.msa..controller.*Controller.*(..))" />
 		<aop:aspect ref="AuthAspect">
 			<aop:around pointcut-ref="controllerMethod" method="targetMethod" />
 		</aop:aspect>
